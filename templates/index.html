@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <title>FastAPI</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+
+            <div class="navbar-left">
+                <div class="navbar-item">
+                    <a href="/" id="home"> Home</a>
+                </div>
+                <div class="navbar-item">
+                    <a href="/about.html" id="about"> About</a>
+                </div>
+            </div>
+
+            <div class="navbar-right">
+                <div class="brand">
+                    <div>DANIEL VIERA</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-wrapper">
+            
+            <div class="center">
+                
+                <div class="form-input">
+                    
+                    <form class="form" id="myForm" method="POST" enctype="multipart/form-data">
+                        
+                        <label for="image" class="btn">Select Image</label>
+                        <input type="file" id="image" name="image" accept="image/png, image/gif, image/jpeg, image/jpg">
+                        <br>
+                        <button type="button" id="btn_predict">Predict</button>
+                    
+                    </form>
+                    
+                    <!-- To display the picture -->
+                    <div class="preview">
+                        <img src="" class="selected-image">
+                    </div>
+
+                </div>
+
+                <!-- To display warning message -->
+                <div class="error-plot"></div>
+
+                <!-- To display warning message -->
+                <div class="no-supported-image"></div>
+
+                <br>
+
+                <!-- To display plot -->
+                <div class="ok-plot"> </div>
+            
+            </div>
+
+            
+        </div>
+        <!-- <img src="" id="selected-image"> -->
+
+       
+    
+    </div>
+
+
+
+        <script>
+            let base64Image;
+            $("#image").change(function() {
+                $('#btn_predict').show();
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let dataURL = reader.result;
+                    $(".selected-image").attr("src", dataURL);
+                    $(".selected-image").css("display","block")
+                    base64Image = dataURL.replace("data:image/*;base64,","")
+                    
+                }
+                reader.readAsDataURL($("#image")[0].files[0]);
+            });
+        </script>
+
+
+</body>
+</html>
